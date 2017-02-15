@@ -13,11 +13,19 @@ module.exports = {
   'border-collapse': 'collapse',
   'border-spacing': '0',
   'text-decoration': 'none',
-  '&:before, &:after': {
-    'content': '',
+  '&:before': {
+    'fallbacks': {
+      content: '""',
+    },
     'content': 'none',
   },
-  ':hover': {
+  '&:after': {
+    'fallbacks': {
+      content: '""',
+    },
+    'content': 'none',
+  },
+  '&:hover': {
     'text-decoration': 'none',
   },
   '&:focus': {
