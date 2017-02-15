@@ -62,7 +62,7 @@ const res = fn(mdn);
 
 const result = `module.exports = ${JSON.stringify(res, null, 2)};`;
 
-fs.writeFile(join(__dirname, 'initials.js'), result, 'utf8', (err, res) => {
+fs.writeFile(join(__dirname, 'index.js'), result, 'utf8', (err, res) => {
   if (err) throw err;
   console.log('☯ done');
 })
