@@ -9,10 +9,16 @@ const fn = R.pipe(...[
 
   R.map(R.zipObj(['prop', 'val'])),
 
-
+  /*
   R.filter(
     R.pathEq(['val', 'inherited'], true)
   ),
+  */
+  R.reject(R.propSatisfies(R.anyPass([
+    R.equals('all'),
+    R.equals('max-inline-size'),
+    R.equals('max-block-size'),
+  ]), 'prop')),
 
   R.map(R.over(
     R.lensProp('val'),

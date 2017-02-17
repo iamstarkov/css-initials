@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "chokidar dumb.js -c 'node build' --initial",
+    "start": "chokidar build.js -c 'node build' --initial",
     "build": "node build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
