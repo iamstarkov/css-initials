@@ -62,6 +62,13 @@ const fn = R.pipe(...[
     ),
     {}
   ),
+
+  R.merge(R.__, {
+    '-webkit-appearance': 'none',
+       '-moz-appearance': 'none',
+        '-ms-appearance': 'none',
+            'appearance': 'none',
+  }),
 ]);
 
 const res = fn(mdn);

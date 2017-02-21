@@ -10,7 +10,7 @@ module.exports = {
   "animation-name": "none",
   "animation-play-state": "running",
   "animation-timing-function": "ease",
-  "appearance": "auto",
+  "appearance": "none",
   "azimuth": "center",
   "backdrop-filter": "none",
   "backface-visibility": "visible",
@@ -275,5 +275,8 @@ module.exports = {
   "word-spacing": "normal",
   "word-wrap": "normal",
   "writing-mode": "horizontal-tb",
-  "z-index": "auto"
+  "z-index": "auto",
+  "-webkit-appearance": "none",
+  "-moz-appearance": "none",
+  "-ms-appearance": "none"
 };
