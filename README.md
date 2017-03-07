@@ -111,10 +111,3 @@ const Button = styled.button`
 
 export default Button;
 ```
-
-
-## Caveats
-
-* `color` varies from Browser To Browser
-* `font-family` depends On User Agent
-* `quotes` depends on User-Agent
