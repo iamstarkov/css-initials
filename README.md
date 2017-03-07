@@ -13,7 +13,7 @@
 
 —What are the caveats?  
 — 1) initial values of `font-family`, `quotes` and `color` depends on browser  
-— 2) list of 14 properties depends on `currentcolor`, which is a reference to property `color`, which varies from browser to browser (hence prev point), and aforementioned list is: `-webkit-border-before-color`, `-webkit-text-fill-color`, `-webkit-text-stroke-color`, `border-block-end-color`, `border-block-start-color`, `border-bottom-color`, `border-inline-end-color`, `border-inline-start-color`, `border-left-color`, `border-right-color`, `border-top-color`, `column-rule-color`, `text-decoration-color`, `text-emphasis-color`.  
+— 2) list of 14 properties depends on `currentColor`, which is a reference to property `color`, which varies from browser to browser (hence prev point), and aforementioned list is: `-webkit-border-before-color`, `-webkit-text-fill-color`, `-webkit-text-stroke-color`, `border-block-end-color`, `border-block-start-color`, `border-bottom-color`, `border-inline-end-color`, `border-inline-start-color`, `border-left-color`, `border-right-color`, `border-top-color`, `column-rule-color`, `text-decoration-color`, `text-emphasis-color`.  
 — 3) initial value of `outline-color` is either `invert` if browser supports it, or `currentColor` otherwise.
 
 —Is this all?  
