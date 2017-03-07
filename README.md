@@ -1,5 +1,7 @@
 # initize
 
+> initial CSS values to use in `all: initial` polyfils 
+
 ## Table of Contents
 
 * [Usage](#usage)
