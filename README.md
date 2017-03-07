@@ -5,7 +5,7 @@
 * [Usage](#usage)
   * [jss](#jss)
   * [styled-components](#styled-components)
-* FAQ
+* [FAQ](#faq)
 
 ## Usage
 
