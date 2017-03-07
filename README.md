@@ -86,8 +86,6 @@ export default Button;
 
 ## FAQ
 
-> initial CSS values to use in `all: initial` polyfills
-
 —**What is wrong with the usual `all: initial`?**  
 —It's [not supported in IE, Edge, Mobile android][IEEDGE].
 
