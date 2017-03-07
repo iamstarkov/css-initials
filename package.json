@@ -1,5 +1,5 @@
 {
-  "name": "jss-expand-all-initial",
+  "name": "initize",
   "version": "0.0.0",
   "description": "",
   "main": "index.js",
@@ -11,11 +11,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "css-tree": "^1.0.0-alpha14",
-    "ramda": "^0.23.0"
-  },
   "devDependencies": {
-    "chokidar-cli": "^1.2.0"
+    "ramda": "^0.23.0",
+    "chokidar-cli": "^1.2.0",
+    "mdn-data": "github:iamstarkov/data#npm-suggestion"
   }
 }
