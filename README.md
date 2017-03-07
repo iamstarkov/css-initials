@@ -2,7 +2,7 @@
 
 ## FAQ
 
-> thoughtful and cross-browser `all: initial`.
+> initial CSS values to use in `all: inital` polyfils
 
 —**What is wrong about usual `all: initial`?**  
 —Its [not supported in IE, Edge, Mobile android][IEEDGE].
