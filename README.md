@@ -58,19 +58,15 @@ export default injectSheet(styles)(Button);
 // once in your project, specify your
 // ./src/components/app-initize/index.js
 import initize from 'initize';
-
-const basic = {
-  'font-family': 'Arial, sans-serif',
-  'quotes': '"“" "”" "‘" "’"',
-  'color': 'black',
-  'outline-color': 'black',
-}
-
-const appInitize = Object.assign({}, initize, basic);
-
 const toCSS = obj => Object.keys(obj).map(key => `${key}: ${obj[key]};`).join('\n');
 
-export default toCSS(appInitize);
+export default `
+  ${toCSS(initize)}
+  font-family: Arial, 'sans-serif';
+  quotes: "“" "”" "‘" "’";
+  color: black;
+  outline-color: black;
+`;
 
 // anywhere after in your components
 // ./src/components/button/index.js
@@ -86,6 +82,8 @@ const Button = styled.button`
 `;
 
 export default Button;
+
+
 ```
 
 ## FAQ
