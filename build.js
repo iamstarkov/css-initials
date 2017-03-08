@@ -90,7 +90,7 @@ const css = R.pipe(...[
     _ => `  ${_};`
   ])),
   R.join('\n'),
-  R.tap(console.log),
+  // R.tap(console.log),
 ]);
 
 
@@ -98,9 +98,8 @@ const res = fn(mdn);
 
 const jsonResult = `module.exports = ${JSON.stringify(res, null, 2)};`;
 
-
-const cssResult = `.allinitial {
-  ${css(res)}
+const cssResult = `.initize {
+${css(res)}
 }`;
 
 fs.writeFile(join(__dirname, 'index.css'), cssResult, 'utf8', (err, res) => {
