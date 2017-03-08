@@ -1,15 +1,43 @@
 # initize
 
-> initial CSS values to use in `all: initial` polyfils 
+> initial CSS values to use in `all: initial` polyfils
 
 ## Table of Contents
 
 * [Usage](#usage)
+  * [css-modules](#css-modules)
   * [jss](#jss)
   * [styled-components](#styled-components)
 * [FAQ](#faq)
 
 ## Usage
+
+### css-modules
+
+```css
+/**
+ * once in your project, specify your
+ * ./src/components/app-initize/index.css
+ */
+.app-initize {
+  composes: initize from 'initize/index.css';
+
+  font-family: Arial, "sans-serif";
+  quotes: "“" "”" "‘" "’";
+  color: black;
+  outline-color: black;
+}
+
+/**
+ *  anywhere after in your components
+ *  ./src/components/button/index.css
+ */
+.button {
+  composes: app-initize from './app-initize.css';
+  /* …more styles here…*/
+}
+
+```
 
 ### css-in-js
 
