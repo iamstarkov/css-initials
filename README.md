@@ -148,7 +148,7 @@ export default Button;
 —It's [not supported in IE, Edge, Mobile android][IEEDGE].
 
 —**What do you mean by cross-browser?**  
-—I took all properties and combined 'em with their initial values.
+—I took all properties and combined 'em with their initial values, so it works in every browser, because its essentially `all: initial`, but expanded.
 
 —**What do you mean by thoughtful?**  
 —There are several caveats about `all: initial` as it is now, and I have built this package with those caveats in mind.
