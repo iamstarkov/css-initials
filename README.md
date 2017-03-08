@@ -5,12 +5,42 @@
 ## Table of Contents
 
 * [Usage](#usage)
+  * [vanilla css](#vanilla-css)
   * [css-modules](#css-modules)
   * [jss](#jss)
   * [styled-components](#styled-components)
 * [FAQ](#faq)
 
 ## Usage
+
+### vanilla css
+
+Copy `index.css` file from the repo into your project as `./css/initize.css` (actual path is up to you).
+
+```css
+/**
+ * on the very top of your ./styles/main.css
+ */
+ @import './css/initize.css';
+.initize {
+  font-family: Arial, "sans-serif";
+  quotes: "“" "”" "‘" "’";
+  color: black;
+  outline-color: black;
+}
+
+/* some styles here */
+
+.button {
+  /* …more styles here…*/
+}
+```
+
+In HTML, just add initize class in the start
+
+```html
+<button class="initize button">Submit</button>
+```
 
 ### css-modules
 
