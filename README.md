@@ -86,14 +86,14 @@ const initizeSheet = jss.createStyleSheet({
     fontFamily: 'Arial, sans-serif',
     quotes: '"“" "”" "‘" "’"',
     color: 'black',
-    outlineColor': 'black',
+    outlineColor: 'black',
   }
 }).attach();
 
 const {classes} = jss.createStyleSheet({
   button: {
     composes: initizeSheet.classes.initize,
-    background: 'blue'
+    background: 'blue',
   }
 }).attach();
 
