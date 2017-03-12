@@ -80,19 +80,18 @@ import preset from 'jss-preset-default';
 
 jss.setup(preset());
 
-const initizeSheet = jss.createStyleSheet({
-  initize: {
-    ...initize,
-    fontFamily: 'Arial, sans-serif',
-    quotes: '"“" "”" "‘" "’"',
-    color: 'black',
-    outlineColor: 'black',
-  }
-}).attach();
+const appInitize = Object.assign({}, initize, {
+  fontFamily: 'Arial, sans-serif',
+  quotes: '"“" "”" "‘" "’"',
+  color: 'black',
+  outlineColor: 'black',
+})
+
+const initizeSheet = jss.createStyleSheet({ appInitize }).attach();
 
 const {classes} = jss.createStyleSheet({
   button: {
-    composes: initizeSheet.classes.initize,
+    composes: initizeSheet.classes.appInitize,
     background: 'blue',
   }
 }).attach();
