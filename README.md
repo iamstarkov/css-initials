@@ -136,30 +136,30 @@ export default Button;
 
 ## FAQ
 
-—**What is wrong with the usual `all: initial`?**
+—**What is wrong with the usual `all: initial`?**  
 —It's [not supported in IE, Edge, Mobile android][IEEDGE].
 
-—**What do you mean by cross-browser?**
+—**What do you mean by cross-browser?**  
 —I took all properties and combined 'em with their initial values, so it works in every browser, because its essentially `all: initial`, but expanded.
 
-—**What do you mean by thoughtful?**
+—**What do you mean by thoughtful?**  
 —There are several caveats about `all: initial` as it is now, and I have built this package with those caveats in mind.
 
-—**What are the caveats?**
+—**What are the caveats?**  
 — 1) Initial values of `font-family`, `quotes` and `color` depend on the browser
 — 2) 14 properties depend on `currentColor`, which is a reference to the `color` property, which varies from browser to browser (hence prev point), and these properties are: `-webkit-border-before-color`, `-webkit-text-fill-color`, `-webkit-text-stroke-color`, `border-block-end-color`, `border-block-start-color`, `border-bottom-color`, `border-inline-end-color`, `border-inline-start-color`, `border-left-color`, `border-right-color`, `border-top-color`, `column-rule-color`, `text-decoration-color`, `text-emphasis-color`.
 — 3) Initial value of `outline-color` is either `invert` if the browser supports it, or `currentColor` otherwise.
 
-—**Is this all?**
+—**Is this all?**  
 —It depends. If you want military grade CSS cascade defense, then no, otherwise hold on. Thing is that according to the spec, `all: initial` doesn't apply initial values to `unicode-bidi` and `direction`.
 
-—**I've never heard of `unicode-bidi`.**
+—**I've never heard of `unicode-bidi`.**  
 —To be honest, me neither. It is quite complicated and I don't know why one would need it. But as long as this property is not inherited it's safe to leave it untouched.
 
-—**What's up with `direction`?**
+—**What's up with `direction`?**  
 —Good question. Firstly, `direction` deals with the `ltr/rtl` problem. Secondly, it is inheritable, so it will definitely affect your components. It can have a negative impact on your components' isolation, so it also doesn't make sense to allow your components to inherit `direction` from the outside world. Your components should be optimised for `ltr` anyway, and `direction: rtl` wont make 'em automatically look good in arabic or hebrew. To fix `ltr/rtl` problem properly you would need a solution like [rtlcss][], because you not only want to change direction, but you want to adjust `text-align`, `margin`, `padding`, `border-width`, etc.
 
-—**Is this all?**
+—**Is this all?**  
 —yes, thanks for your attention.
 
 [IEEDGE]: http://caniuse.com/#feat=css-all
