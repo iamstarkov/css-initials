@@ -146,8 +146,8 @@ export default Button;
 —There are several caveats about `all: initial` as it is now, and I have built this package with those caveats in mind.
 
 —**What are the caveats?**  
-— 1) Initial values of `font-family`, `quotes` and `color` depend on the browser
-— 2) 14 properties depend on `currentColor`, which is a reference to the `color` property, which varies from browser to browser (hence prev point), and these properties are: `-webkit-border-before-color`, `-webkit-text-fill-color`, `-webkit-text-stroke-color`, `border-block-end-color`, `border-block-start-color`, `border-bottom-color`, `border-inline-end-color`, `border-inline-start-color`, `border-left-color`, `border-right-color`, `border-top-color`, `column-rule-color`, `text-decoration-color`, `text-emphasis-color`.
+— 1) Initial values of `font-family`, `quotes` and `color` depend on the browser  
+— 2) 14 properties depend on `currentColor`, which is a reference to the `color` property, which varies from browser to browser (hence prev point), and these properties are: `-webkit-border-before-color`, `-webkit-text-fill-color`, `-webkit-text-stroke-color`, `border-block-end-color`, `border-block-start-color`, `border-bottom-color`, `border-inline-end-color`, `border-inline-start-color`, `border-left-color`, `border-right-color`, `border-top-color`, `column-rule-color`, `text-decoration-color`, `text-emphasis-color`.  
 — 3) Initial value of `outline-color` is either `invert` if the browser supports it, or `currentColor` otherwise.
 
 —**Is this all?**  
