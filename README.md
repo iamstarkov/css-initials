@@ -74,40 +74,32 @@ In HTML, just add initize class in the start
 #### jss
 
 ```js
-// once in your project, specify your
-// ./src/components/app-initize/index.js
 import initize from 'initize';
+import jss from 'jss';
+import preset from 'jss-preset-default';
 
-const basic = {
-  'font-family': 'Arial, sans-serif',
-  'quotes': '"“" "”" "‘" "’"',
-  'color': 'black',
-  'outline-color': 'black',
-}
+jss.setup(preset());
 
-const appInitize = Object.assign({}, initize, basic);
+const appInitize = Object.assign({}, initize, {
+  fontFamily: 'Arial, sans-serif',
+  quotes: '"“" "”" "‘" "’"',
+  color: 'black',
+  outlineColor: 'black',
+})
 
-export default appInitize;
+const initizeSheet = jss.createStyleSheet({ appInitize }).attach();
 
-// anywhere after in your components
-// ./src/components/button/index.js
+const {classes} = jss.createStyleSheet({
+  button: {
+    composes: initizeSheet.classes.appInitize,
+    background: 'blue',
+  }
+}).attach();
 
-import React from 'react';
-import cn from 'classnames';
-import initize from '../app-initize';
+document.body.innerHTML = `
+  <button class="${classes.button}">Button</button>
+`;
 
-const styles = {
-  initize,
-  button: { },
-}
-
-const Button = ({ sheet: { classes }, children, }) => (
-  <button className={classes.initize + ' ' classes.button}>
-    { children }
-  </button>
-};
-
-export default injectSheet(styles)(Button);
 ```
 
 #### styled-components
