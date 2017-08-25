@@ -1,11 +1,11 @@
 {
-  "name": "initize",
+  "name": "css-initials",
   "version": "0.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "chokidar build.js -c 'node build' --initial",
-    "build": "node build",
+    "start": "chokidar build.js -c 'node ./bin/build' --initial",
+    "build": "node ./bin/build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
