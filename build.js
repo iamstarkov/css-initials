@@ -15,7 +15,11 @@ const APPEARANCE_FIX = {
      '-moz-appearance': 'none',
       '-ms-appearance': 'none',
           'appearance': 'none',
-}
+};
+
+const USER_AGENT_DEPENDENT_PROPS = [
+  'color', 'quotes', 'text-align', 'box-orient', 'font-family'
+];
 
 const cssProps = R.path(['css', 'properties']);
 
@@ -66,15 +70,17 @@ const fn = (options = {}) => R.pipe(...[
       R.propEq('status', 'experimental'),
       // we do need only non-complex props
       R.complement(R.propIs(String, 'initial')),
-      // we dont need any browser dependent props
-      R.propSatisfies(R.anyPass([
-        R.test(/browser/i),
-        R.test(/useragent/i),
-      ]), 'initial'),
       // If in herited option is specified - filter by the inherited property.
       ({inherited}) => options.inherited === undefined ? false : inherited !== options.inherited
     ]), 'val')
   ])),
+  // we dont need any browser dependent props
+  R.map((data) => {
+    if (USER_AGENT_DEPENDENT_PROPS.indexOf(data.prop) !== -1) {
+      data.val.initial = 'initial'
+    }
+    return data
+  }),
   mapVal(R.pipe(...[
     initial,
     normalize

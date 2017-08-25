@@ -1,5 +1,6 @@
 .initize-all {
   -ms-overflow-style: auto;
+  -moz-appearance: none;
   -moz-binding: none;
   -moz-border-bottom-colors: none;
   -moz-border-left-colors: none;
@@ -106,7 +107,7 @@
   box-flex-group: 1;
   box-lines: single;
   box-ordinal-group: 1;
-  box-orient: inlineAxisHorizontalInXUL;
+  box-orient: initial;
   box-pack: start;
   box-shadow: none;
   box-sizing: content-box;
@@ -118,6 +119,7 @@
   clear: none;
   clip: auto;
   clip-path: none;
+  color: initial;
   column-count: auto;
   column-fill: balance;
   column-gap: normal;
@@ -139,6 +141,7 @@
   flex-shrink: 1;
   flex-wrap: nowrap;
   float: none;
+  font-family: initial;
   font-feature-settings: normal;
   font-kerning: auto;
   font-language-override: normal;
@@ -241,6 +244,7 @@
   perspective-origin: 50% 50%;
   pointer-events: auto;
   position: static;
+  quotes: initial;
   resize: none;
   right: auto;
   ruby-align: space-around;
@@ -259,7 +263,7 @@
   shape-outside: none;
   tab-size: 8;
   table-layout: auto;
-  text-align: startOrNamelessValueIfLTRRightIfRTL;
+  text-align: initial;
   text-align-last: auto;
   text-combine-upright: none;
   text-decoration-color: currentcolor;
@@ -299,7 +303,6 @@
   writing-mode: horizontal-tb;
   z-index: auto;
   -webkit-appearance: none;
-  -moz-appearance: none;
   -ms-appearance: none;
   appearance: none;
 }
