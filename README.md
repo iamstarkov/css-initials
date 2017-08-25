@@ -1,4 +1,4 @@
-# initize
+# css-initials
 
 > initial CSS values to use in `all: initial` polyfils
 
@@ -13,85 +13,93 @@
 
 ## Usage
 
-### vanilla css
+### Vanilla css
 
-Copy `index.css` file from the repo into your project as `./css/initize.css` (actual path is up to you).
+Import `all.css` or `inherited.css` file and add the class `initials-all` or `initials-inherited` to an element you want to have initial values.
 
 ```css
 /**
- * on the very top of your ./styles/main.css
+ * On the very top of your ./styles/main.css
  */
- @import './css/initize.css';
-.initize {
+ @import './css/css-initials.css';
+
+/*
+ * Those properties depend on a browser and user settings. You can reset them manually
+ * if you want them to behave consistently.
+ */
+.initials-all {
   font-family: Arial, "sans-serif";
+  text-align: left;
   quotes: "“" "”" "‘" "’";
   color: black;
   outline-color: black;
 }
 
-/* some styles here */
+/* user styles here */
 
 .button {
-  /* …more styles here…*/
+  /* …more user styles here…*/
 }
 ```
 
-In HTML, just add initize class in the start
+In HTML, just add css-initials class in the start
 
 ```html
-<button class="initize button">Submit</button>
+<button class="initials-all button">Submit</button>
 ```
 
 ### css-modules
 
 ```css
 /**
- * once in your project, specify your
- * ./src/components/app-initize/index.css
+ * Once in your project, specify your
+ * ./src/components/app-css-initials/index.css
  */
-.app-initize {
-  composes: initize from 'initize/index.css';
+.app-css-initials {
+  composes: css-initials from 'css-initials/index.css';
 
   font-family: Arial, "sans-serif";
+  text-align: left;
   quotes: "“" "”" "‘" "’";
   color: black;
   outline-color: black;
 }
 
 /**
- *  anywhere after in your components
+ *  Anywhere after in your components
  *  ./src/components/button/index.css
  */
 .button {
-  composes: app-initize from './app-initize.css';
-  /* …more styles here…*/
+  composes: app-css-initials from './app-css-initials.css';
+  /* …more user styles here…*/
 }
 
 ```
 
 ### css-in-js
 
-#### jss
+#### JSS
 
 ```js
-import initize from 'initize';
+import cssInitials from 'css-initials';
 import jss from 'jss';
 import preset from 'jss-preset-default';
 
 jss.setup(preset());
 
-const appInitize = Object.assign({}, initize, {
+const myCssInitials = Object.assign({}, cssInitials, {
   fontFamily: 'Arial, sans-serif',
+  textAlign: 'left',
   quotes: '"“" "”" "‘" "’"',
   color: 'black',
   outlineColor: 'black',
-})
+});
 
-const initizeSheet = jss.createStyleSheet({ appInitize }).attach();
+const sheet = jss.createStyleSheet({ initials: myCssInitials }).attach();
 
 const {classes} = jss.createStyleSheet({
   button: {
-    composes: initizeSheet.classes.appInitize,
+    composes: sheet.classes.initials,
     background: 'blue',
   }
 }).attach();
@@ -101,31 +109,32 @@ document.body.innerHTML = `
 `;
 
 ```
-
 #### styled-components
 
 ```js
-// once in your project, specify your
-// ./src/components/app-initize/index.js
-import initize from 'initize';
+// Once in your project, specify your
+// ./src/components/app-css-initials/index.js
+import cssInitials from 'css-initials';
+
 const toCSS = obj => Object.keys(obj).map(key => `${key}: ${obj[key]};`).join('\n');
 
 export default `
-  ${toCSS(initize)}
+  ${toCSS(cssInitials)}
   font-family: Arial, 'sans-serif';
+  text-align: left;
   quotes: "“" "”" "‘" "’";
   color: black;
   outline-color: black;
 `;
 
-// anywhere after in your components
+// Anywhere after in your components
 // ./src/components/button/index.js
 import React from 'react';
 import styled from 'styled-components';
-import appInitize from '../app-initize';
+import initials from '../app-css-initials';
 
 const Button = styled.button`
-  ${appInitize}
+  ${initials}
   display: inline-block;
   border-radius: 5px;
   /* …more styles here…*/
