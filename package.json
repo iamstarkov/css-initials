@@ -1,19 +1,28 @@
 {
   "name": "css-initials",
-  "version": "0.0.0",
-  "description": "",
+  "version": "0.1.1",
+  "description": "Initial CSS values for `all: initial` polyfills.",
   "main": "index.js",
   "scripts": {
     "start": "chokidar build.js -c 'node ./bin/build' --initial",
     "build": "node ./bin/build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
+  "keywords": [
+    "CSS",
+    "initial",
+    "values",
+    "all: initial"
+  ],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "ramda": "^0.23.0",
     "chokidar-cli": "^1.2.0",
     "mdn-data": "^1.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:iamstarkov/initize.git"
   }
 }

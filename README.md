@@ -1,6 +1,6 @@
 # css-initials
 
-> initial CSS values to use in `all: initial` polyfils
+Initial CSS values for `all: initial` polyfills.
 
 ## Table of Contents
 
