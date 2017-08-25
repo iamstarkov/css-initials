@@ -220,7 +220,7 @@ module.exports = {
   "opacity": "1.0",
   "order": "0",
   "orphans": "2",
-  "outline-color": "invertOrCurrentColor",
+  "outline-color": "initial",
   "outline-offset": "0",
   "outline-style": "none",
   "outline-width": "medium",
