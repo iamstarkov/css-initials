@@ -1,8 +1,7 @@
 const { join } = require('path');
 const fs = require('fs');
-var R = require('ramda');
-
-var mdn = require('mdn-data');
+const R = require('ramda');
+const mdn = require('mdn-data');
 
 const EXCLUDE_LIST = [
   'all',
@@ -18,7 +17,7 @@ const APPEARANCE_FIX = {
 };
 
 const USER_AGENT_DEPENDENT_PROPS = [
-  'color', 'quotes', 'text-align', 'box-orient', 'font-family'
+  'color', 'outline-color', 'quotes', 'text-align', 'box-orient', 'font-family'
 ];
 
 const cssProps = R.path(['css', 'properties']);
@@ -53,7 +52,6 @@ const arr2ObjReducer = (acc, i) => R.merge(
 );
 
 const arr2Obj = R.reduce( arr2ObjReducer, {} );
-
 
 const fn = (options = {}) => R.pipe(...[
   cssProps,
@@ -100,9 +98,11 @@ const css = R.pipe(...[
   // R.tap(console.log),
 ]);
 
+const targetDir = join(__dirname, '..');
+
 const writeCss = (res, {selector, filename}) => new Promise((resolve, reject) => {
   const cssResult = `${selector} {\n${css(res)}\n}`;
-  fs.writeFile(join(__dirname, `${filename}.css`), cssResult, 'utf8', (err, res) => {
+  fs.writeFile(join(targetDir, `${filename}.css`), cssResult, 'utf8', (err, res) => {
     if (err) reject(err);
     resolve();
   });
@@ -110,7 +110,7 @@ const writeCss = (res, {selector, filename}) => new Promise((resolve, reject) =>
 
 const writeJs = (res, {filename}) => new Promise((resolve, reject) => {
   const jsonResult = `module.exports = ${JSON.stringify(res, null, 2)};`;
-  fs.writeFile(join(__dirname, `${filename}.js`), jsonResult, 'utf8', (err, res) => {
+  fs.writeFile(join(targetDir, `${filename}.js`), jsonResult, 'utf8', (err, res) => {
     if (err) reject(err);
     resolve();
   })
@@ -121,9 +121,9 @@ const resInherited = fn({inherited: true})(mdn)
 
 Promise
   .all([
-    writeCss(resAll, {selector: '.initize-all', filename: 'index'}),
-    writeJs(resAll, {filename: 'index'}),
-    writeCss(resInherited, {selector: '.initize-inherited', filename: 'inherited'}),
+    writeCss(resAll, {selector: '.initials-all', filename: 'all'}),
+    writeJs(resAll, {filename: 'all'}),
+    writeCss(resInherited, {selector: '.initials-inherited', filename: 'inherited'}),
     writeJs(resInherited, {filename: 'inherited'})
   ])
   .catch((err) => {
