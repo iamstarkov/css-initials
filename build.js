@@ -15,7 +15,11 @@ const APPEARANCE_FIX = {
      '-moz-appearance': 'none',
       '-ms-appearance': 'none',
           'appearance': 'none',
-}
+};
+
+const USER_AGENT_DEPENDENT_PROPS = [
+  'color', 'quotes', 'text-align', 'box-orient', 'font-family'
+];
 
 const cssProps = R.path(['css', 'properties']);
 
@@ -24,7 +28,6 @@ const obj2arr = R.pipe(...[
   R.toPairs,
   R.map(R.zipObj(['prop', 'val'])),
 ]);
-
 
 // Remove unneccesaery props
 // [ { prop: $prop, value: valueObj }, … ] => [ { prop: $prop, value: initialValue }, … ]
@@ -37,7 +40,7 @@ const mapVal = fn => R.map(
 );
 
 const initial = R.prop('initial');
-const normalize = R.replace(/<\/?code>/g, '')
+const normalize = R.replace(/<\/?code>/g, '');
 
 // [ { prop: $prop, value: initialValue }, … ] => { [$prop]: initialValue, … }
 const arr2ObjReducer = (acc, i) => R.merge(
@@ -52,7 +55,7 @@ const arr2ObjReducer = (acc, i) => R.merge(
 const arr2Obj = R.reduce( arr2ObjReducer, {} );
 
 
-const fn = R.pipe(...[
+const fn = (options = {}) => R.pipe(...[
   cssProps,
   obj2arr,
   R.reject(R.either(...[
@@ -67,16 +70,20 @@ const fn = R.pipe(...[
       R.propEq('status', 'experimental'),
       // we do need only non-complex props
       R.complement(R.propIs(String, 'initial')),
-      // we dont need any browser dependent props
-      R.propSatisfies(R.anyPass([
-        R.test(/browser/i),
-        R.test(/useragent/i),
-      ]), 'initial'),
-    ]), 'val'),
+      // If in herited option is specified - filter by the inherited property.
+      ({inherited}) => options.inherited === undefined ? false : inherited !== options.inherited
+    ]), 'val')
   ])),
+  // we dont need any browser dependent props
+  R.map((data) => {
+    if (USER_AGENT_DEPENDENT_PROPS.indexOf(data.prop) !== -1) {
+      data.val.initial = 'initial'
+    }
+    return data
+  }),
   mapVal(R.pipe(...[
     initial,
-    normalize,
+    normalize
   ])),
   arr2Obj,
   R.merge(R.__, APPEARANCE_FIX),
@@ -93,21 +100,35 @@ const css = R.pipe(...[
   // R.tap(console.log),
 ]);
 
+const writeCss = (res, {selector, filename}) => new Promise((resolve, reject) => {
+  const cssResult = `${selector} {\n${css(res)}\n}`;
+  fs.writeFile(join(__dirname, `${filename}.css`), cssResult, 'utf8', (err, res) => {
+    if (err) reject(err);
+    resolve();
+  });
+});
 
-const res = fn(mdn);
+const writeJs = (res, {filename}) => new Promise((resolve, reject) => {
+  const jsonResult = `module.exports = ${JSON.stringify(res, null, 2)};`;
+  fs.writeFile(join(__dirname, `${filename}.js`), jsonResult, 'utf8', (err, res) => {
+    if (err) reject(err);
+    resolve();
+  })
+});
 
-const jsonResult = `module.exports = ${JSON.stringify(res, null, 2)};`;
+const resAll = fn()(mdn)
+const resInherited = fn({inherited: true})(mdn)
 
-const cssResult = `.initize {
-${css(res)}
-}`;
-
-fs.writeFile(join(__dirname, 'index.css'), cssResult, 'utf8', (err, res) => {
-  if (err) throw err;
-  console.log('☯ done');
-})
-
-fs.writeFile(join(__dirname, 'index.js'), jsonResult, 'utf8', (err, res) => {
-  if (err) throw err;
-  console.log('☯ done');
-})
+Promise
+  .all([
+    writeCss(resAll, {selector: '.initize-all', filename: 'index'}),
+    writeJs(resAll, {filename: 'index'}),
+    writeCss(resInherited, {selector: '.initize-inherited', filename: 'inherited'}),
+    writeJs(resInherited, {filename: 'inherited'})
+  ])
+  .catch((err) => {
+    throw err
+  })
+  .then(() => {
+    console.log('☯ All done');
+  })
