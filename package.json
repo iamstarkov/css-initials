@@ -17,9 +17,9 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "ramda": "^0.23.0",
     "chokidar-cli": "^1.2.0",
-    "mdn-data": "^1.0.0"
+    "mdn-data": "^1.0.0",
+    "ramda": "^0.23.0"
   },
   "repository": {
     "type": "git",
