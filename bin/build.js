@@ -64,8 +64,10 @@ const fn = (options = {}) => R.pipe(...[
     ]), 'prop'),
     // rejecting by prop value
     R.propSatisfies(R.anyPass([
-      // we dont need experimental props
+      // we don't need experimental props
       R.propEq('status', 'experimental'),
+      // we don't need non-standard props
+      R.propEq('status', 'nonstandard'),
       // we do need only non-complex props
       R.complement(R.propIs(String, 'initial')),
       // If in herited option is specified - filter by the inherited property.

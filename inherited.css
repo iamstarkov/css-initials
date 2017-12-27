@@ -1,17 +1,4 @@
 .initials-inherited {
-  -ms-overflow-style: auto;
-  -moz-context-properties: none;
-  -moz-image-region: auto;
-  -moz-stack-sizing: stretch-to-fit;
-  -moz-user-input: auto;
-  -moz-user-modify: read-only;
-  -webkit-border-before-color: currentcolor;
-  -webkit-border-before-style: none;
-  -webkit-border-before-width: medium;
-  -webkit-text-fill-color: currentcolor;
-  -webkit-text-stroke-color: currentcolor;
-  -webkit-text-stroke-width: 0;
-  -webkit-touch-callout: default;
   azimuth: center;
   border-collapse: separate;
   border-spacing: 0;
