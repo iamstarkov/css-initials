@@ -1,7 +1,8 @@
-const { join } = require('path');
+const { dirname, join } = require('path');
 const fs = require('fs');
 const R = require('ramda');
 const mdn = require('mdn-data');
+const makeDir = require('make-dir');
 
 const EXCLUDE_LIST = [
   'all',
@@ -100,23 +101,45 @@ const css = R.pipe(...[
   // R.tap(console.log),
 ]);
 
+const writeFile = (filepath, content) => {
+  return makeDir(dirname(filepath)).then(() => {
+    return new Promise((resolve, reject) => {
+      fs.writeFile(filepath, content, 'utf8', (err, res) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve();
+        }
+      });
+    })
+  })
+}
+
 const targetDir = join(__dirname, '..');
 
-const writeCss = (res, {selector, filename}) => new Promise((resolve, reject) => {
+const writeCss = (res, {selector, filename}) => {
   const cssResult = `${selector} {\n${css(res)}\n}`;
-  fs.writeFile(join(targetDir, `${filename}.css`), cssResult, 'utf8', (err, res) => {
-    if (err) reject(err);
-    resolve();
-  });
-});
+  return writeFile(join(targetDir, `${filename}.css`), cssResult, 'utf8');
+};
 
-const writeJs = (res, {filename}) => new Promise((resolve, reject) => {
+const writeCJS = (res, {filename}) => {
   const jsonResult = `module.exports = ${JSON.stringify(res, null, 2)};`;
-  fs.writeFile(join(targetDir, `${filename}.js`), jsonResult, 'utf8', (err, res) => {
-    if (err) reject(err);
-    resolve();
-  })
-});
+  return writeFile(join(targetDir, `dist/${filename}.cjs.js`), jsonResult)
+};
+
+const writeESM = (res, {filename}) => {
+  const jsonResult = `export default ${JSON.stringify(res, null, 2)};`;
+  return writeFile(join(targetDir, `dist/${filename}.esm.js`), jsonResult)
+};
+
+const writePkg = name => {
+  const pkg = {
+    name: `css-initials/${name}`,
+    main: `../dist/${name}.cjs.js`,
+    module: `../dist/${name}.esm.js`
+  };
+  return writeFile(`${name}/package.json`, JSON.stringify(pkg, null, 2));
+}
 
 const resAll = fn()(mdn)
 const resInherited = fn({inherited: true})(mdn)
@@ -124,9 +147,13 @@ const resInherited = fn({inherited: true})(mdn)
 Promise
   .all([
     writeCss(resAll, {selector: '.initials-all', filename: 'all'}),
-    writeJs(resAll, {filename: 'all'}),
+    writeCJS(resAll, {filename: 'all'}),
+    writeESM(resAll, {filename: 'all'}),
+    writePkg('all'),
     writeCss(resInherited, {selector: '.initials-inherited', filename: 'inherited'}),
-    writeJs(resInherited, {filename: 'inherited'})
+    writeCJS(resInherited, {filename: 'inherited'}),
+    writeESM(resInherited, {filename: 'inherited'}),
+    writePkg('inherited'),
   ])
   .catch((err) => {
     throw err
