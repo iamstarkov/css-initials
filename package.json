@@ -2,12 +2,13 @@
   "name": "css-initials",
   "version": "0.2.0",
   "description": "Initial CSS values for `all: initial` polyfills.",
-  "main": "index.js",
+  "main": "dist/all.cjs.js",
+  "module": "dist/all.esm.js",
   "scripts": {
     "start": "chokidar build.js -c 'node ./bin/build' --initial",
     "build": "node ./bin/build",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "yarn build"
   },
   "keywords": [
     "CSS",
@@ -19,6 +20,7 @@
   "license": "ISC",
   "devDependencies": {
     "chokidar-cli": "^1.2.0",
+    "make-dir": "^2.0.0",
     "mdn-data": "^1.0.0",
     "ramda": "^0.23.0"
   },
