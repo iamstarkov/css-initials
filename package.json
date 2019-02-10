@@ -4,6 +4,13 @@
   "description": "Initial CSS values for `all: initial` polyfills.",
   "main": "dist/all.cjs.js",
   "module": "dist/all.esm.js",
+  "files": [
+    "dist",
+    "all",
+    "all.css",
+    "inherited",
+    "inherited.css"
+  ],
   "scripts": {
     "start": "chokidar build.js -c 'node ./bin/build' --initial",
     "build": "node ./bin/build",
