@@ -1,6 +1,6 @@
 {
   "name": "css-initials",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Initial CSS values for `all: initial` polyfills.",
   "main": "dist/all.cjs.js",
   "module": "dist/all.esm.js",
